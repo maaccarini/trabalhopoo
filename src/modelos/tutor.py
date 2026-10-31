@@ -1,13 +1,15 @@
+_tutores : list[Tutor] = []
+
 class Tutor:
     """Representa o responsável por um pet."""
-
-    total_criados = 0
-
+    total_criados : int = 0
     def __init__(self, nome:str, telefone:str) -> None:
         self.nome = nome
-        self.telefone = telefone
-        Tutor.total_criados += 1 
-
+        #self.telefone = telefone
+        self.validar_telefone(telefone)
+        _tutores.append(self)
+        self.total_criados += 1 
+        
     @property 
     def nome(self) -> str:
         """Retorna o nome do tutor."""

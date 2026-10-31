@@ -1,4 +1,5 @@
 from modelos.servicos import listar_servicos
+from modelos.pet import cadastrar_pet
 
 def menu_index() -> None :
     escolha_menu : str = f"""
@@ -18,7 +19,9 @@ def menu_index() -> None :
         menu = int(input("Digite o que deseja fazer: "))
         match menu:
             case 1 :
-                pass
+                cadastrar_pet()
+                input("Pressione enter para continuar...")
+                continue
             case 2 :
                 pass
             case 3:
