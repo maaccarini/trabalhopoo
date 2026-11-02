@@ -4,8 +4,9 @@ class Tutor:
     """Representa o responsável por um pet."""
     total_criados : int = 0
     def __init__(self, nome:str, telefone:str) -> None:
-        self.nome = nome
-        self.validar_telefone(telefone)
+        self._nome = nome
+        if self.validar_telefone(telefone):
+            self._telefone = telefone
         self.total_criados += 1 
     
     @property 

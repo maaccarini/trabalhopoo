@@ -18,19 +18,19 @@ class Pet():
         self._tutor = tutor
         
     @property
-    def porte(self):
+    def porte(self) -> str:
         return self._porte
     
     @property
-    def nome(self):
+    def nome(self) -> str:
         return self._nome
     
     @property
-    def especie(self):
+    def especie(self) -> str:
         return self._especie
     
     @property
-    def tutor(self):
+    def tutor(self) -> Tutor:
         return self._tutor
     
     @porte.setter
@@ -47,11 +47,11 @@ class Pet():
         return f"{self.nome} - {self.especie} sob cuidados do {self.tutor}"
     
 def cadastrar_pet() -> None:
-    nome_pet = input("Digite o nome do pet: ").upper()
-    espec_pet = input("Digite a especie do pet: ").upper()
-    porte_pet = input("Pequeno, médio ou grande: ").upper()
-    tutor_nome_pet = input("Digite o nome do tutor: ")
-    tutor_telefone_pet = input("Digite o telefone do tutor: ")
+    nome_pet : str = input("Digite o nome do pet: ").upper()
+    espec_pet : str = input("Digite a especie do pet: ").upper()
+    porte_pet : str = input("Pequeno, médio ou grande: ").upper()
+    tutor_nome_pet : str = input("Digite o nome do tutor: ")
+    tutor_telefone_pet : str = input("Digite o telefone do tutor: ")
     tutor_pet : Tutor = Tutor(tutor_nome_pet, tutor_telefone_pet)
     novo_pet : Pet = Pet(nome_pet, espec_pet, porte_pet, tutor_pet)
     pets.append(novo_pet)
