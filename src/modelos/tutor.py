@@ -5,11 +5,9 @@ class Tutor:
     total_criados : int = 0
     def __init__(self, nome:str, telefone:str) -> None:
         self.nome = nome
-        #self.telefone = telefone
         self.validar_telefone(telefone)
-        _tutores.append(self)
         self.total_criados += 1 
-        
+    
     @property 
     def nome(self) -> str:
         """Retorna o nome do tutor."""
@@ -39,7 +37,7 @@ class Tutor:
         self._telefone = "".join(
             caractere for caractere in valor if caractere.isdigit()
         )
-
+        
     @staticmethod
     def validar_telefone(telefone: str) -> bool:
         """Verifica se o telefone tem 10 ou 11 dígitos."""
@@ -64,4 +62,11 @@ class Tutor:
 
     def __str__(self) -> str:
         """Retorna uma descrição do tutor."""
-        return f"{self.nome} - Telefone: {self.telefone}"
+        return f"Tutor: {self.nome} - Telefone: {self.telefone}"
+
+def cadastrar_tutor() -> None:
+    """ Método que cria um objeto Tutor. """
+    nome_tutor : str = input("Insira o nome do tutor: ")
+    telefone_tutor : str = input("Insira o telefone do tutor\nExemplo - XXXXXXXXXXX : ")
+    _tutores.append(Tutor(nome_tutor, telefone_tutor))
+    print("Tutor cadastrado com sucesso. ")

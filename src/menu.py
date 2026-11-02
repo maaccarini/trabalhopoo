@@ -1,6 +1,8 @@
 from modelos.servicos import listar_servicos
-from modelos.pet import cadastrar_pet
+from modelos.pet import cadastrar_pet, procurar_pet
+from modelos.tutor import cadastrar_tutor
 
+""" Método para criar interface no cmd.  """
 def menu_index() -> None :
     escolha_menu : str = f"""
     {'=' * 10} SISTEMA PET SHOP {'=' * 10}
@@ -23,14 +25,18 @@ def menu_index() -> None :
                 input("Pressione enter para continuar...")
                 continue
             case 2 :
-                pass
+                cadastrar_tutor()
+                input("Pressione enter para continuar...")
+                continue
             case 3:
                 # Mostra os serviços disponíveis no pet shop com seus respectivos preços.
                 listar_servicos()
                 input("Pressione enter para continuar...")
                 continue
             case 4:
-                pass
+                print(procurar_pet(input("Insira o nome do pet: ")))
+                input("Pressione enter para continuar...")
+                continue
             case 5:
                 pass
             case 6:
