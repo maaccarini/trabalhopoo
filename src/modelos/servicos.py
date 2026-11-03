@@ -12,7 +12,21 @@ class Servico(ABC):
         """Retorna o preço do serviço e obriga as subclasses
         a utilizarem esse atributo."""
         pass
-
+    
+    @staticmethod
+    def listar_servicos() -> None:
+        servicos: list[Servico] = [Banho(), Tosa(), Hospedagem()]
+        print(f"""
+        {'=' * 10} SERVIÇOS DO PET SHOP {'=' * 10}
+        """)
+        for numero, servico in enumerate(servicos, start=1):
+            print(f"""
+                {numero} - {servico}
+                """)
+        """
+        Uso do Polimorfismo para percorrer os três objetos
+        em uma mesma lista e cada um exibe seu valor.
+        """
     def __str__(self) -> str:
         """Retorna o nome e o preço do serviço."""
         return f"{self.nome_servico} - R$ {self.calcular_preco():.2f}"
@@ -52,17 +66,3 @@ class Hospedagem(Servico):
     def calcular_preco(self) -> float:
         """Retorna o preço da Hospedagem pelo peso. Uso do Polimorfismo."""
         return self.PRECO_DIARIA
-
-def listar_servicos() -> None:
-    servicos: list[Servico] = [Banho(), Tosa(), Hospedagem()]
-    print(f"""
-    {'=' * 10} SERVIÇOS DO PET SHOP {'=' * 10}
-    """)
-    for numero, servico in enumerate(servicos, start=1):
-        print(f"""
-            {numero} - {servico}
-            """)
-        """
-        Uso do Polimorfismo para percorrer os três objetos
-        em uma mesma lista e cada um exibe seu valor.
-        """

@@ -49,7 +49,17 @@ class Tutor:
             caractere for caractere in telefone if caractere.isdigit()
         )
         return len(digitos) in (10, 11)
-
+    
+    @staticmethod
+    def cadastrar_tutor() -> Tutor:
+        """ Método que cria um objeto Tutor. """
+        nome_tutor : str = input("Insira o nome do tutor: ")
+        telefone_tutor : str = input("Insira o telefone do tutor\nExemplo - XXXXXXXXXXX : ")
+        tutor_cadastrar : Tutor = Tutor(nome_tutor, telefone_tutor)
+        _tutores.append(tutor_cadastrar)
+        print("Tutor cadastrado com sucesso. ")
+        return tutor_cadastrar
+        
     @classmethod
     def from_string(cls, dados: str) -> "Tutor":
         """Cria um tutor a partir do texto 'nome;telefone'."""
@@ -64,10 +74,3 @@ class Tutor:
     def __str__(self) -> str:
         """Retorna uma descrição do tutor."""
         return f"Tutor: {self.nome} - Telefone: {self.telefone}"
-
-def cadastrar_tutor() -> None:
-    """ Método que cria um objeto Tutor. """
-    nome_tutor : str = input("Insira o nome do tutor: ")
-    telefone_tutor : str = input("Insira o telefone do tutor\nExemplo - XXXXXXXXXXX : ")
-    _tutores.append(Tutor(nome_tutor, telefone_tutor))
-    print("Tutor cadastrado com sucesso. ")

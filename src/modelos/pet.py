@@ -1,6 +1,6 @@
+from abc import ABC, abstractmethod
 from modelos.tutor import Tutor
 
-""" Guarda o nome, espécie, porte e tutor """
 PORTE : dict[int, str] = {
     1 : "PEQUENO",
     2 : "MEDIO",
@@ -9,13 +9,14 @@ PORTE : dict[int, str] = {
 
 pets : list[Pet] = []
 
-class Pet():
-        
-    def __init__(self, nome : str, especie : str, porte : str, tutor : Tutor) -> None:
+class Pet(ABC):
+    """ Guarda o nome, espécie, porte e tutor que pertence"""
+    def __init__(self, nome : str, especie : str, porte : str, tutor : Tutor, peso : float) -> None:
         self._nome =  nome.upper()
         self._especie = especie.upper()
         self._porte = self.validar_porte(self, porte)
         self._tutor = tutor
+        self._peso = peso
         
     @property
     def porte(self) -> str:
@@ -43,23 +44,41 @@ class Pet():
             print(f"Não é possível definir o porte deste valor, tente: {PORTE.values()}")
         self._porte = porte.upper()
     
-    def __str__(self) -> str:
-        return f"{self.nome} - {self.especie} sob cuidados do {self.tutor}"
+    @staticmethod
+    def procurar_pet(nome_pet : str) -> str :
+        """ Procura o pet a partir do nome na lista. """
+        for pet in pets:
+            if pet._nome == nome_pet.upper():
+                return pet
+        print("Não encontrado.")
     
-def cadastrar_pet() -> None:
-    nome_pet : str = input("Digite o nome do pet: ").upper()
-    espec_pet : str = input("Digite a especie do pet: ").upper()
-    porte_pet : str = input("Pequeno, médio ou grande: ").upper()
-    tutor_nome_pet : str = input("Digite o nome do tutor: ")
-    tutor_telefone_pet : str = input("Digite o telefone do tutor: ")
-    tutor_pet : Tutor = Tutor(tutor_nome_pet, tutor_telefone_pet)
-    novo_pet : Pet = Pet(nome_pet, espec_pet, porte_pet, tutor_pet)
-    pets.append(novo_pet)
+    @staticmethod
+    def cadastrar_pet(pet_cadastrar : Pet) -> None:
+        """ Cadastra um pet (seja que animal for) em uma lista """
+        novo_pet : Pet = pet_cadastrar
+        pets.append(novo_pet)
+    
+    def __str__(self) -> str:
+        """ Retorna o descritivo do pet junto do animal que é """
+        return f"{self.__class__.__name__} com o nome {self.nome} - {self.especie} sob cuidados do {self.tutor}"
 
-def procurar_pet(nome_pet : str) -> str :
-    for pet in pets:
-        if pet._nome == nome_pet.upper():
-            return pet
-            continue
-    print("Não encontrado.")
+class Cachorro(Pet):
+    def __init__(self, nome, especie, porte, tutor, peso) -> None:
+        super().__init__(nome, especie, porte, tutor, peso)
+        self._animal : str = "Cachorro"
+
+class Gato(Pet):
+    def __init__(self, nome, especie, porte, tutor, peso) -> None:
+        super().__init__(nome, especie, porte, tutor, peso)
+        self._animal : str = "Gato"
+
+class Cavalo(Pet):
+    def __init__(self, nome, especie, porte, tutor, peso) -> None:
+        super().__init__(nome, especie, porte, tutor, peso)
+        self._animal : str = "Cavalo"
+
+class Lontra(Pet):
+    def __init__(self, nome, especie, porte, tutor, peso) -> None:
+        super().__init__(nome, especie, porte, tutor, peso)
+        self._animal : str = "Lontra"
         

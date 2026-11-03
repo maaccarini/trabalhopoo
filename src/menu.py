@@ -1,6 +1,6 @@
-from modelos.servicos import listar_servicos
-from modelos.pet import cadastrar_pet, procurar_pet
-from modelos.tutor import cadastrar_tutor
+from modelos.servicos import Servico
+from modelos.pet import Pet, Cachorro, Cavalo, Gato, Lontra
+from modelos.tutor import Tutor
 
 """ Método para criar interface no cmd.  """
 def menu_index() -> None :
@@ -21,20 +21,46 @@ def menu_index() -> None :
         menu = int(input("Digite o que deseja fazer: "))
         match menu:
             case 1 :
-                cadastrar_pet()
+                nome_pet : str = input("Digite o nome do pet: ").upper()
+                espec_pet : str = input("Digite a especie do pet: ").upper()
+                porte_pet : str = input("Pequeno, médio ou grande: ").upper()
+                peso_pet : float = input("Peso do Pet: ")
+                tutor_pet = Tutor.cadastrar_tutor()
+                animal : int = int(input("Qual é o animal: 1 - Cachorro | 2 - Gato | 3 - Cavalo | 4 - Lontra .: "))
+                pet_cadastrar : Pet = None
+                match animal :
+                    case 1 :
+                        pet_cadastrar = Cachorro(nome_pet, espec_pet, porte_pet, tutor_pet, peso_pet)
+                        Pet.cadastrar_pet(pet_cadastrar)
+                        continue
+                    case 2 :
+                        pet_cadastrar = Gato(nome_pet, espec_pet, porte_pet, tutor_pet, peso_pet)
+                        Pet.cadastrar_pet(pet_cadastrar)
+                        continue
+                    case 3 :
+                        pet_cadastrar = Cavalo(nome_pet, espec_pet, porte_pet, tutor_pet, peso_pet)
+                        Pet.cadastrar_pet(pet_cadastrar)
+                        continue
+                    case 4:
+                        pet_cadastrar = Lontra(nome_pet, espec_pet, porte_pet, tutor_pet, peso_pet)
+                        Pet.cadastrar_pet(pet_cadastrar)
+                        continue
+                    case _:
+                        print("Não existe tipo de animal com esse número. Favor reinsira o número correto!")
+                        continue
                 input("Pressione enter para continuar...")
                 continue
             case 2 :
-                cadastrar_tutor()
+                Tutor.cadastrar_tutor()
                 input("Pressione enter para continuar...")
                 continue
             case 3:
                 # Mostra os serviços disponíveis no pet shop com seus respectivos preços.
-                listar_servicos()
+                Servico.listar_servicos()
                 input("Pressione enter para continuar...")
                 continue
             case 4:
-                print(procurar_pet(input("Insira o nome do pet: ")))
+                print(Pet.procurar_pet(input("Insira o nome do pet: ")))
                 input("Pressione enter para continuar...")
                 continue
             case 5:
