@@ -35,7 +35,7 @@ class Servico(ABC):
 class Banho(Servico):
     """Representa o serviço de banho."""
 
-    PRECO = 40.0
+    PRECO : float = 40.0
 
     def __init__(self) -> None:
         super().__init__("Banho")
@@ -47,7 +47,7 @@ class Banho(Servico):
 class Tosa(Servico):
     """ Retorna o serviço de tosa """
 
-    PRECO = 65.0
+    PRECO : float = 65.0
 
     def __init__(self) -> None:
         super().__init__("Tosa")
@@ -58,7 +58,7 @@ class Tosa(Servico):
 
 class Hospedagem(Servico):
     """ Retorna o serviço de hospedagem do pet """
-    PRECO_DIARIA = 50.5
+    PRECO_DIARIA : float = 50.5
     
     def __init__(self) -> None:
         super().__init__("Hospedagem")

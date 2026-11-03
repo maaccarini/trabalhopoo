@@ -11,13 +11,18 @@ pets : list[Pet] = []
 
 class Pet(ABC):
     """ Guarda o nome, espécie, porte e tutor que pertence"""
-    def __init__(self, nome : str, especie : str, porte : str, tutor : Tutor, peso : float) -> None:
+    def __init__(self, animal : str, nome : str, especie : str, porte : str, tutor : Tutor, peso : float) -> None:
+        self._animal = animal
         self._nome =  nome.upper()
         self._especie = especie.upper()
         self._porte = self.validar_porte(self, porte)
-        self._tutor = tutor
+        self._tutor_reponsavel = tutor
         self._peso = peso
-        
+    
+    @property
+    def animal(self) -> str:
+        return self._animal
+    
     @property
     def porte(self) -> str:
         return self._porte
@@ -32,14 +37,13 @@ class Pet(ABC):
     
     @property
     def tutor(self) -> Tutor:
-        return self._tutor
+        return self._tutor_reponsavel
     
     @porte.setter
     def alterar_porte(self, porte : str):
-        self.validar_porte(self, porte)
+        self._validar_porte(self, porte)
     
-    @staticmethod
-    def validar_porte(self, porte : str) -> None :
+    def _validar_porte(self, porte : str) -> None :
         if porte.upper() not in PORTE.values():
             print(f"Não é possível definir o porte deste valor, tente: {PORTE.values()}")
         self._porte = porte.upper()
@@ -60,25 +64,21 @@ class Pet(ABC):
     
     def __str__(self) -> str:
         """ Retorna o descritivo do pet junto do animal que é """
-        return f"{self.__class__.__name__} com o nome {self.nome} - {self.especie} sob cuidados do {self.tutor}"
+        return f"{self.animal.upper()} com o nome {self.nome} - {self.especie} sob cuidados do {self.tutor}"
 
 class Cachorro(Pet):
     def __init__(self, nome, especie, porte, tutor, peso) -> None:
-        super().__init__(nome, especie, porte, tutor, peso)
-        self._animal : str = "Cachorro"
-
+        super().__init__("Cachorro", nome, especie, porte, tutor, peso)
+        
 class Gato(Pet):
     def __init__(self, nome, especie, porte, tutor, peso) -> None:
-        super().__init__(nome, especie, porte, tutor, peso)
-        self._animal : str = "Gato"
+        super().__init__("Gato", nome, especie, porte, tutor, peso)
 
 class Cavalo(Pet):
     def __init__(self, nome, especie, porte, tutor, peso) -> None:
-        super().__init__(nome, especie, porte, tutor, peso)
-        self._animal : str = "Cavalo"
+        super().__init__("Cavalo", nome, especie, porte, tutor, peso)
 
 class Lontra(Pet):
     def __init__(self, nome, especie, porte, tutor, peso) -> None:
-        super().__init__(nome, especie, porte, tutor, peso)
-        self._animal : str = "Lontra"
+        super().__init__("Lontra", nome, especie, porte, tutor, peso)
         

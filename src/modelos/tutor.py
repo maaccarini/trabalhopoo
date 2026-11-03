@@ -38,8 +38,7 @@ class Tutor:
         self._telefone = "".join(
             caractere for caractere in valor if caractere.isdigit()
         )
-        
-    @staticmethod
+
     def validar_telefone(telefone: str) -> bool:
         """Verifica se o telefone tem 10 ou 11 dígitos."""
         if not isinstance(telefone, str):
